@@ -20,6 +20,21 @@ class Day1 {
     fun extractDigits(line: String): Int {
         var digits = ""
         var lastDigit = ""
+        for (char in line) {
+            if (numbers.contains(char.toString())) {
+                if (digits == "") {
+                    digits += char
+                }
+                lastDigit = char.toString()
+            }
+        }
+        digits += lastDigit
+        return digits.toInt()
+    }
+
+    fun extractDigitsAndWords(line: String): Int {
+        var digits = ""
+        var lastDigit = ""
         var lineIndex = 0
         while (lineIndex < line.length) {
             val char = line[lineIndex]
@@ -54,10 +69,18 @@ class Day1 {
 
 fun main() {
     val path = "/Users/adrian/workspace/advent-of-code/src/main/resources/Day1"
-    val lines : List<String> = File(path).readLines()
+    val lines: List<String> = File(path).readLines()
     val day1 = Day1()
-    val sum = lines.sumOf {
+
+    // part one
+    val sum1 = lines.sumOf {
         day1.extractDigits(it)
     }
-    println(sum)
+    println(sum1)
+
+    // part two
+    val sum2 = lines.sumOf {
+        day1.extractDigitsAndWords(it)
+    }
+    println(sum2)
 }
